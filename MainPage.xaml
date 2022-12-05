@@ -3,39 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StuxxTools.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
+    <ScrollView
+        >
+        <StackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                x:Name="fileName"
+                Text=" "
                 FontSize="18"
                 HorizontalOptions="Center" />
 
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                x:Name="SelectionButton"
+                Text="Select audio..."
+                Clicked="SelectionClick"
                 HorizontalOptions="Center" />
 
-        </VerticalStackLayout>
+            <Picker
+                x:Name="formatPicker"
+                BackgroundColor="Gray"
+                Title="Pick an audio format..."
+                SelectedIndexChanged="IndexChanged"
+                HorizontalTextAlignment="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.mp3</x:String>
+                        <x:String>.wav</x:String>
+                        <x:String>.ogg</x:String>
+                        <x:String>.m4a</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label
+                x:Name="infoText"
+                Text="Please pick an audio format"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            
+        </StackLayout>
     </ScrollView>
 
 </ContentPage>
