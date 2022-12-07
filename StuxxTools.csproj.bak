@@ -28,7 +28,9 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		
+		<TargetFramework>netcoreapp4.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -51,21 +53,6 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CSAudioConverter" Version="1.1.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="CSAudioConverter">
-	    <HintPath>bin\Debug\net6.0-windows10.0.19041.0\win10-x64\CSAudioConverter.dll</HintPath>
-	  </Reference>
-	  <Reference Include="CSCore">
-	    <HintPath>bin\Debug\net6.0-windows10.0.19041.0\win10-x64\CSCore.dll</HintPath>
-	  </Reference>
-	  <Reference Include="CSCore.Ffmpeg">
-	    <HintPath>bin\Debug\net6.0-windows10.0.19041.0\win10-x64\CSCore.Ffmpeg.dll</HintPath>
-	  </Reference>
-	  <Reference Include="taglib-sharp">
-	    <HintPath>bin\Debug\net6.0-windows10.0.19041.0\win10-x64\taglib-sharp.dll</HintPath>
-	  </Reference>
 	</ItemGroup>
 
 </Project>

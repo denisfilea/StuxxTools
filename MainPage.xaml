@@ -3,47 +3,89 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StuxxTools.MainPage">
 
-    <ScrollView
-        >
+    <ScrollView>
         <StackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            Spacing="10"
+            Padding="10,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
 
             <Label
-                x:Name="fileName"
-                Text=" "
+                x:Name="infoText"
+                Text="Please pick an audio format"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
+            <Picker
+                x:Name="formatPickerSource"
+                BackgroundColor="Gray"
+                Title="Convert from..."
+                SelectedIndexChanged="IndexChanged"
+                HorizontalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.aac</x:String>
+                        <x:String>.ape</x:String>
+                        <x:String>.mp2</x:String>
+                        <x:String>.mp3</x:String>
+                        <x:String>.ogg</x:String>
+                        <x:String>.wav</x:String>
+                        <x:String>.wma</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
             <Button
                 x:Name="SelectionButton"
                 Text="Select audio..."
                 Clicked="SelectionClick"
                 HorizontalOptions="Center" />
 
+            <Label
+                x:Name="fileName"
+                Text="File name:"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
             <Picker
-                x:Name="formatPicker"
+                x:Name="formatPickerDest"
                 BackgroundColor="Gray"
-                Title="Pick an audio format..."
+                Title="Convert into..."
                 SelectedIndexChanged="IndexChanged"
-                HorizontalTextAlignment="Center">
+                HorizontalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
+                        <x:String>.aac</x:String>
+                        <x:String>.ape</x:String>
+                        <x:String>.mp2</x:String>
                         <x:String>.mp3</x:String>
-                        <x:String>.wav</x:String>
                         <x:String>.ogg</x:String>
-                        <x:String>.m4a</x:String>
+                        <x:String>.wav</x:String>
+                        <x:String>.wma</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+
+            <Button
+                x:Name="ConvertButton"
+                Text="Convert"
+                Clicked="ConvertClick"
+                HorizontalOptions="Center"/>
+
             <Label
-                x:Name="infoText"
-                Text="Please pick an audio format"
-                FontSize="18"
-                HorizontalOptions="Center" />
-            
+                x:Name="Path"
+                Text="Destination Path:"
+                FontSize="19"
+                HorizontalOptions="Center"/>
+
+            <Button
+                x:Name="OpenLocation"
+                Text="Open file location"
+                Clicked="OpenFileLocation"
+                HorizontalOptions="Center"/>
+
         </StackLayout>
+        
     </ScrollView>
 
 </ContentPage>
