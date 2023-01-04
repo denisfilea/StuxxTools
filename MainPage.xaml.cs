@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
     {
         if (formatPickerSource.SelectedIndex != -1)
         {
-            infoText.Text = "Please pick an " + (string)formatPickerSource.ItemsSource[formatPickerSource.SelectedIndex] + " file.";
+            infoText.Text = "Pick an " + (string)formatPickerSource.ItemsSource[formatPickerSource.SelectedIndex] + " file.";
         }
     }
 
@@ -73,9 +73,11 @@ public partial class MainPage : ContentPage
             audioConverter1.SourceFiles.Add(sourceFile);
             audioConverter1.Convert();
 
-            Path.Text = sDestinationFile;
+            Path.Text = "Path: " + sDestinationFile;
 
             await DisplayAlert("Status", "Conversion complete", "OK");
+
+            Status.Text = "Status: Done!";
         }
         else
         {

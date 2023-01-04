@@ -4,24 +4,56 @@
              x:Class="StuxxTools.MainPage">
 
     <ScrollView>
-        <StackLayout
-            Spacing="10"
-            Padding="10,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Start">
+        <Grid
+            Padding="25"
+            RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="500" />
+            </Grid.ColumnDefinitions>
+            
+            <!--AUDIO CONVERTER-->
 
             <Label
+                Grid.ColumnSpan="4"
+                Grid.Row="0"
+                Text="AUDIO CONVERTER"
+                FontSize="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
                 x:Name="infoText"
-                Text="Please pick an audio format"
+                Text="Pick an audio format"
                 FontSize="18"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
 
             <Picker
+                Grid.Column="1"
+                Grid.Row="1"
                 x:Name="formatPickerSource"
                 BackgroundColor="Gray"
                 Title="Convert from..."
                 SelectedIndexChanged="IndexChanged"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>.aac</x:String>
@@ -34,25 +66,50 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            
+
             <Button
+                Grid.Column="2"
+                Grid.Row="1"
                 x:Name="SelectionButton"
                 Text="Select audio..."
                 Clicked="SelectionClick"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
 
             <Label
+                Grid.Column="3"
+                Grid.Row="1"
                 x:Name="fileName"
                 Text="File name:"
                 FontSize="18"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="2"
+                Text="↓"
+                FontSize="39"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="3"
+                Text="Pick an audio format for the output file"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
 
             <Picker
+                Grid.Column="1"
+                Grid.Row="3"
                 x:Name="formatPickerDest"
                 BackgroundColor="Gray"
                 Title="Convert into..."
                 SelectedIndexChanged="IndexChanged"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>.aac</x:String>
@@ -67,24 +124,176 @@
             </Picker>
 
             <Button
+                Grid.Column="2"
+                Grid.Row="3"
                 x:Name="ConvertButton"
                 Text="Convert"
                 Clicked="ConvertClick"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
 
             <Label
+                Grid.Column="3"
+                Grid.Row="3"
+                x:Name="Status"
+                Text="Status: "
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="4"
                 x:Name="Path"
                 Text="Destination Path:"
                 FontSize="19"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
 
             <Button
+                Grid.Column="3"
+                Grid.Row="4"
                 x:Name="OpenLocation"
                 Text="Open file location"
                 Clicked="OpenFileLocation"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                
+            
+            <!--VIDEO CONVERTER-->
+            
+            <Label
+                Grid.ColumnSpan="4"
+                Grid.Row="0"
+                Text="AUDIO CONVERTER"
+                FontSize="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
 
-        </StackLayout>
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                x:Name="infoText"
+                Text="Pick an audio format"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="1"
+                x:Name="formatPickerSource"
+                BackgroundColor="Gray"
+                Title="Convert from..."
+                SelectedIndexChanged="IndexChanged"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.aac</x:String>
+                        <x:String>.ape</x:String>
+                        <x:String>.mp2</x:String>
+                        <x:String>.mp3</x:String>
+                        <x:String>.ogg</x:String>
+                        <x:String>.wav</x:String>
+                        <x:String>.wma</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="1"
+                x:Name="SelectionButton"
+                Text="Select audio..."
+                Clicked="SelectionClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Column="3"
+                Grid.Row="1"
+                x:Name="fileName"
+                Text="File name:"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="2"
+                Text="↓"
+                FontSize="39"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="3"
+                Text="Pick an audio format for the output file"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="3"
+                x:Name="formatPickerDest"
+                BackgroundColor="Gray"
+                Title="Convert into..."
+                SelectedIndexChanged="IndexChanged"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.aac</x:String>
+                        <x:String>.ape</x:String>
+                        <x:String>.mp2</x:String>
+                        <x:String>.mp3</x:String>
+                        <x:String>.ogg</x:String>
+                        <x:String>.wav</x:String>
+                        <x:String>.wma</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="3"
+                x:Name="ConvertButton"
+                Text="Convert"
+                Clicked="ConvertClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="3"
+                Grid.Row="3"
+                x:Name="Status"
+                Text="Status: "
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="4"
+                x:Name="Path"
+                Text="Destination Path:"
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="3"
+                Grid.Row="4"
+                x:Name="OpenLocation"
+                Text="Open file location"
+                Clicked="OpenFileLocation"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+        </Grid>
         
     </ScrollView>
 
