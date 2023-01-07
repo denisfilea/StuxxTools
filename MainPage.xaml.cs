@@ -1,25 +1,24 @@
-﻿using Microsoft.Maui.Storage;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
+﻿using System.Diagnostics;
 
 namespace StuxxTools;
 
 public partial class MainPage : ContentPage
 {
-    FileBase pickedAudio;
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    FileBase pickedFile;
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
-	private async void SelectionClick(object sender, EventArgs e)
-	{
+    // ===============
+    // AUDIO CONVERTER
+    // ===============
+
+    private async void SelectionClick(object sender, EventArgs e)
+    {
         if (formatPickerSource.SelectedIndex != -1)
         {
-            pickedAudio = await FilePicker.Default.PickAsync(new PickOptions
+            pickedFile = await FilePicker.Default.PickAsync(new PickOptions
             {
                 PickerTitle = "Select audio file",
                 FileTypes = new FilePickerFileType(
@@ -33,10 +32,10 @@ public partial class MainPage : ContentPage
             });
 
 
-            if (pickedAudio == null)
+            if (pickedFile == null)
                 return;
 
-            var audioname = "File name: " + pickedAudio.FileName;
+            var audioname = "File name: " + pickedFile.FileName;
 
             fileName.Text = audioname;
         }
@@ -44,7 +43,7 @@ public partial class MainPage : ContentPage
         {
             await DisplayAlert("Alert", "Pick an audio format before choosing a file.", "OK");
         }
-	}
+    }
 
     private void IndexChanged(object sender, EventArgs e)
     {
@@ -69,7 +68,7 @@ public partial class MainPage : ContentPage
             audioConverter1.Format = (CSAudioConverter.Format)Enum.Parse(typeof(CSAudioConverter.Format), extension.ToUpper().Remove(0, 1));
 
             audioConverter1.SourceFiles.Clear();
-            Options.Core.SourceFile sourceFile = new Options.Core.SourceFile(pickedAudio.FullPath);
+            Options.Core.SourceFile sourceFile = new Options.Core.SourceFile(pickedFile.FullPath);
             audioConverter1.SourceFiles.Add(sourceFile);
             audioConverter1.Convert();
 
@@ -89,6 +88,88 @@ public partial class MainPage : ContentPage
     {
         Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
     }
+
+
+    // ===============
+    // VIDEO CONVERTER
+    // ===============
+
+    private void videoIndexChanged(object sender, EventArgs e)
+    {
+        if (videoFormatPickerSource.SelectedIndex != -1)
+        {
+            videoInfoText.Text = "Pick an " + (string)videoFormatPickerSource.ItemsSource[videoFormatPickerSource.SelectedIndex] + " file.";
+        }
+    }
+
+    private async void videoSelectionClick(object sender, EventArgs e)
+    {
+        if (videoFormatPickerSource.SelectedIndex != -1)
+        {
+            pickedFile = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select video file",
+                FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                { DevicePlatform.WinUI, new [] { "*"+ (string)videoFormatPickerSource.ItemsSource[videoFormatPickerSource.SelectedIndex] } },
+                { DevicePlatform.Android, new [] { "video/*" } },
+                { DevicePlatform.iOS, new[] { "public.video" } },
+                { DevicePlatform.MacCatalyst, new[] { "public.video" } }
+                })
+            });
+
+
+            if (pickedFile == null)
+                return;
+
+            var videoname = "File name: " + pickedFile.FileName;
+
+            videoFileName.Text = videoname;
+        }
+        else
+        {
+            await DisplayAlert("Alert", "Pick a video format before choosing a file.", "OK");
+        }
+
+
+    }
+
+    private void videoOpenFileLocation(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
+    }
+
+
+    private async void videoConvertClick(object sender, EventArgs e)
+    {
+        if (videoFormatPickerDest.SelectedIndex != -1 && videoFormatPickerSource.SelectedIndex != -1)
+        {
+
+            string extension = (string)videoFormatPickerDest.ItemsSource[videoFormatPickerDest.SelectedIndex];
+            string filename = videoFileName.Text.Remove(0, 11);
+            string sDestinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\[" + extension.ToUpper().Remove(0, 1) + "] " + filename.Remove(filename.Length - 4, 4) + extension;
+
+            
+
+            /*var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
+            ffMpeg.ConvertMedia(pickedFile.FullPath, sDestinationFile, extension.Remove(0, 1));*/
+
+            videoPath.Text = "Path: " + sDestinationFile;
+
+            await DisplayAlert("Status", "Conversion complete", "OK");
+
+            videoStatus.Text = "Status: Done!";
+        }
+
+        else
+        {
+            await DisplayAlert("Alert", "Pick a video format before converting a file.", "OK");
+        }
+    }
+
+
+
 
 }
 

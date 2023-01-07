@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="500" />
             </Grid.ColumnDefinitions>
-            
+
             <!--AUDIO CONVERTER-->
 
             <Label
@@ -158,62 +158,63 @@
                 Clicked="OpenFileLocation"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
-                
-            
+
+
             <!--VIDEO CONVERTER-->
-            
+
             <Label
                 Grid.ColumnSpan="4"
-                Grid.Row="0"
-                Text="AUDIO CONVERTER"
+                Grid.Row="5"
+                Text="VIDEO CONVERTER"
                 FontSize="40"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
             <Label
                 Grid.Column="0"
-                Grid.Row="1"
-                x:Name="infoText"
-                Text="Pick an audio format"
+                Grid.Row="6"
+                x:Name="videoInfoText"
+                Text="Pick a video format"
                 FontSize="18"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
 
             <Picker
                 Grid.Column="1"
-                Grid.Row="1"
-                x:Name="formatPickerSource"
+                Grid.Row="6"
+                x:Name="videoFormatPickerSource"
                 BackgroundColor="Gray"
                 Title="Convert from..."
-                SelectedIndexChanged="IndexChanged"
+                SelectedIndexChanged="videoIndexChanged"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>.aac</x:String>
-                        <x:String>.ape</x:String>
-                        <x:String>.mp2</x:String>
-                        <x:String>.mp3</x:String>
-                        <x:String>.ogg</x:String>
-                        <x:String>.wav</x:String>
-                        <x:String>.wma</x:String>
+                        <x:String>.mp4</x:String>
+                        <x:String>.mov</x:String>
+                        <x:String>.wmv</x:String>
+                        <x:String>.avi</x:String>
+                        <x:String>.flv</x:String>
+                        <x:String>.swf</x:String>
+                        <x:String>.mpeg</x:String>
+                        <x:String>.webm</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
 
             <Button
                 Grid.Column="2"
-                Grid.Row="1"
-                x:Name="SelectionButton"
-                Text="Select audio..."
-                Clicked="SelectionClick"
+                Grid.Row="6"
+                x:Name="videoSelectionButton"
+                Text="Select video..."
+                Clicked="videoSelectionClick"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
             <Label
                 Grid.Column="3"
-                Grid.Row="1"
-                x:Name="fileName"
+                Grid.Row="6"
+                x:Name="videoFileName"
                 Text="File name:"
                 FontSize="18"
                 HorizontalOptions="Center"
@@ -221,7 +222,7 @@
 
             <Label
                 Grid.ColumnSpan="3"
-                Grid.Row="2"
+                Grid.Row="7"
                 Text="↓"
                 FontSize="39"
                 HorizontalOptions="Center"
@@ -229,47 +230,48 @@
 
             <Label
                 Grid.Column="0"
-                Grid.Row="3"
-                Text="Pick an audio format for the output file"
+                Grid.Row="8"
+                Text="Pick a video format for the output file"
                 FontSize="18"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
             <Picker
                 Grid.Column="1"
-                Grid.Row="3"
-                x:Name="formatPickerDest"
+                Grid.Row="8"
+                x:Name="videoFormatPickerDest"
                 BackgroundColor="Gray"
                 Title="Convert into..."
-                SelectedIndexChanged="IndexChanged"
+                SelectedIndexChanged="videoIndexChanged"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>.aac</x:String>
-                        <x:String>.ape</x:String>
-                        <x:String>.mp2</x:String>
-                        <x:String>.mp3</x:String>
-                        <x:String>.ogg</x:String>
-                        <x:String>.wav</x:String>
-                        <x:String>.wma</x:String>
+                        <x:String>.mp4</x:String>
+                        <x:String>.mov</x:String>
+                        <x:String>.wmv</x:String>
+                        <x:String>.avi</x:String>
+                        <x:String>.flv</x:String>
+                        <x:String>.swf</x:String>
+                        <x:String>.mpeg</x:String>
+                        <x:String>.webm</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
 
             <Button
                 Grid.Column="2"
-                Grid.Row="3"
-                x:Name="ConvertButton"
+                Grid.Row="8"
+                x:Name="videoConvertButton"
                 Text="Convert"
-                Clicked="ConvertClick"
+                Clicked="videoConvertClick"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
 
             <Label
                 Grid.Column="3"
-                Grid.Row="3"
-                x:Name="Status"
+                Grid.Row="8"
+                x:Name="videoStatus"
                 Text="Status: "
                 FontSize="19"
                 HorizontalOptions="Center"
@@ -277,8 +279,8 @@
 
             <Label
                 Grid.ColumnSpan="3"
-                Grid.Row="4"
-                x:Name="Path"
+                Grid.Row="9"
+                x:Name="videoPath"
                 Text="Destination Path:"
                 FontSize="19"
                 HorizontalOptions="Center"
@@ -286,15 +288,15 @@
 
             <Button
                 Grid.Column="3"
-                Grid.Row="4"
-                x:Name="OpenLocation"
+                Grid.Row="9"
+                x:Name="videoOpenLocation"
                 Text="Open file location"
-                Clicked="OpenFileLocation"
+                Clicked="videoOpenFileLocation"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
 
         </Grid>
-        
+
     </ScrollView>
 
 </ContentPage>
