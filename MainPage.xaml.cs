@@ -1,4 +1,13 @@
 ﻿using System.Diagnostics;
+using Xabe.FFmpeg;
+using System;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using MediaToolkit.Model;
+using MediaToolkit;
 
 namespace StuxxTools;
 
@@ -150,10 +159,13 @@ public partial class MainPage : ContentPage
             string filename = videoFileName.Text.Remove(0, 11);
             string sDestinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\[" + extension.ToUpper().Remove(0, 1) + "] " + filename.Remove(filename.Length - 4, 4) + extension;
 
-            
+            var inputFile = new MediaFile { Filename = pickedFile.FullPath };
+            var outputFile = new MediaFile { Filename = sDestinationFile };
 
-            /*var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
-            ffMpeg.ConvertMedia(pickedFile.FullPath, sDestinationFile, extension.Remove(0, 1));*/
+            using (var engine = new Engine())
+            {
+                engine.Convert(inputFile, outputFile);
+            }
 
             videoPath.Text = "Path: " + sDestinationFile;
 
