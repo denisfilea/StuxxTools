@@ -1,19 +1,17 @@
 ﻿using System.Diagnostics;
-using Xabe.FFmpeg;
-using System;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using MediaToolkit.Model;
 using MediaToolkit;
+using ImageProcessor.Imaging.Formats;
+using ImageProcessor;
+using MediaToolkit.Util;
+using Aspose.Words;
 
 namespace StuxxTools;
 
 public partial class MainPage : ContentPage
 {
     FileBase pickedFile;
+    string docExtension;
     public MainPage()
     {
         InitializeComponent();
@@ -29,7 +27,7 @@ public partial class MainPage : ContentPage
         {
             pickedFile = await FilePicker.Default.PickAsync(new PickOptions
             {
-                PickerTitle = "Select audio file",
+                PickerTitle = "Select an audio file",
                 FileTypes = new FilePickerFileType(
                 new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
@@ -117,7 +115,7 @@ public partial class MainPage : ContentPage
         {
             pickedFile = await FilePicker.Default.PickAsync(new PickOptions
             {
-                PickerTitle = "Select video file",
+                PickerTitle = "Select a video file",
                 FileTypes = new FilePickerFileType(
                 new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
@@ -181,6 +179,205 @@ public partial class MainPage : ContentPage
     }
 
 
+    // ===============
+    // IMAGE CONVERTER
+    // ===============
+
+    private void imageIndexChanged(object sender, EventArgs e)
+    {
+        if (imageFormatPickerSource.SelectedIndex != -1)
+        {
+            imageInfoText.Text = "Pick an " + (string)imageFormatPickerSource.ItemsSource[imageFormatPickerSource.SelectedIndex] + " file.";
+        }
+    }
+
+    private async void imageSelectionClick(object sender, EventArgs e)
+    {
+        if (imageFormatPickerSource.SelectedIndex != -1)
+        {
+            pickedFile = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select an image file",
+                FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                { DevicePlatform.WinUI, new [] { "*"+ (string)imageFormatPickerSource.ItemsSource[imageFormatPickerSource.SelectedIndex] } },
+                { DevicePlatform.Android, new [] { "image/*" } },
+                { DevicePlatform.iOS, new[] { "public.image" } },
+                { DevicePlatform.MacCatalyst, new[] { "public.image" } }
+                })
+            });
+
+
+            if (pickedFile == null)
+                return;
+
+            var imageName = "File name: " + pickedFile.FileName;
+
+            imageFileName.Text = imageName;
+        }
+        else
+        {
+            await DisplayAlert("Alert", "Pick an image format before choosing a file.", "OK");
+        }
+
+
+    }
+
+    private void imageOpenFileLocation(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+    }
+
+
+    private async void imageConvertClick(object sender, EventArgs e)
+    {
+        if (imageFormatPickerDest.SelectedIndex != -1 && imageFormatPickerSource.SelectedIndex != -1)
+        {
+
+            string extension = (string)imageFormatPickerDest.ItemsSource[imageFormatPickerDest.SelectedIndex];
+            string filename = imageFileName.Text.Remove(0, 11);
+            string sDestinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\[" + extension.ToUpper().Remove(0, 1) + "] " + filename.Remove(filename.Length - 4, 4) + extension;
+
+            ISupportedImageFormat format = null;
+
+            if (extension == ".jpeg")
+            {
+                format = new JpegFormat { Quality = 70 };
+            }
+
+            if (extension == ".png")
+            {
+                format = new PngFormat { Quality = 70 };
+            }
+
+            if (extension == ".jpg")
+            {
+                format = new JpegFormat { Quality = 70 };
+            }
+
+            if (extension == ".bmp")
+            {
+                format = new BitmapFormat { Quality = 70 };
+            }
+
+            if (extension == ".gif")
+            {
+                format = new GifFormat { Quality = 70 };
+            }
+
+            if (extension == ".tiff")
+            {
+                format = new TiffFormat { Quality = 70 };
+            }
+
+            Size size = new Size(150, 0);
+            using (FileStream inStream = new FileStream(pickedFile.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (FileStream outStream = new FileStream(sDestinationFile, FileMode.Create))
+                {
+
+                    using (ImageFactory imageFactory = new ImageFactory(preserveExifData: true))
+                    {
+
+                        imageFactory.Load(inStream)
+                                    .Format(format)
+                                    .Save(outStream);
+                    }
+                }
+            }
+
+            imagePath.Text = "Path: " + sDestinationFile;
+
+            await DisplayAlert("Status", "Conversion complete", "OK");
+
+            imageStatus.Text = "Status: Done!";
+        }
+
+        else
+        {
+            await DisplayAlert("Alert", "Pick an image format before converting a file.", "OK");
+        }
+    }
+
+    // ===============
+    // DOC CONVERTER
+    // ===============
+
+    private void Swap(object sender, EventArgs e)
+    {
+        docInfo.Text = docInfo.Text.Equals("PDF to Word") ? "Word to PDF" : "PDF to Word";
+    }
+
+    private void docOpenFileLocation(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+    }
+
+    private async void docSelectionClick(object sender, EventArgs e)
+    {
+        if (docInfo.Text.Equals("PDF to Word"))
+        {
+            pickedFile = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a PDF file",
+                FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                { DevicePlatform.WinUI, new [] { "*.pdf"} },
+                { DevicePlatform.Android, new [] { "documents/*" } },
+                { DevicePlatform.iOS, new[] { "public.documents" } },
+                { DevicePlatform.MacCatalyst, new[] { "public.documents" } }
+                })
+            });
+
+
+            if (pickedFile == null)
+                return;
+
+            docExtension = ".docx";
+        }
+
+        if (docInfo.Text.Equals("Word to PDF"))
+        {
+            pickedFile = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a word document file",
+                FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                { DevicePlatform.WinUI, new [] { "*.docx"} },
+                { DevicePlatform.Android, new [] { "documents/*" } },
+                { DevicePlatform.iOS, new[] { "public.documents" } },
+                { DevicePlatform.MacCatalyst, new[] { "public.documents" } }
+                })
+            });
+
+
+            if (pickedFile == null)
+                return;
+
+
+            docExtension = ".pdf";
+
+        }
+
+    }
+
+    private async void docConvertClick(object sender, EventArgs e)
+    {
+        if (docInfo.Text == "PDF to Word")
+        {
+            string filename = pickedFile.FileName;
+            string sDestinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\[" + docExtension.ToUpper().Remove(0, 1) + "] " + filename.Remove(filename.Length - 4, 4) + docExtension;
+
+            Aspose.Words.Document doc = new Aspose.Words.Document(pickedFile.FullPath);
+            doc.Save(sDestinationFile);
+
+            await DisplayAlert("Status", "Conversion complete", "OK");
+        }
+
+    }
 
 
 }

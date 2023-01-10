@@ -18,6 +18,14 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="75" />
                 <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
@@ -292,6 +300,201 @@
                 x:Name="videoOpenLocation"
                 Text="Open file location"
                 Clicked="videoOpenFileLocation"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <!--IMAGE CONVERTER-->
+
+            <Label
+                Grid.ColumnSpan="4"
+                Grid.Row="10"
+                Text="IMAGE CONVERTER"
+                FontSize="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="11"
+                x:Name="imageInfoText"
+                Text="Pick an image format"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="11"
+                x:Name="imageFormatPickerSource"
+                BackgroundColor="Gray"
+                Title="Convert from..."
+                SelectedIndexChanged="imageIndexChanged"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.jpg</x:String>
+                        <x:String>.png</x:String>
+                        <x:String>.svg</x:String>
+                        <x:String>.gif</x:String>
+                        <x:String>.jpeg</x:String>
+                        <x:String>.tiff</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="11"
+                x:Name="imageSelectionButton"
+                Text="Select image..."
+                Clicked="imageSelectionClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Column="3"
+                Grid.Row="11"
+                x:Name="imageFileName"
+                Text="File name:"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="12"
+                Text="↓"
+                FontSize="39"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="13"
+                Text="Pick an image format for the output file"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="13"
+                x:Name="imageFormatPickerDest"
+                BackgroundColor="Gray"
+                Title="Convert into..."
+                SelectedIndexChanged="imageIndexChanged"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>.jpg</x:String>
+                        <x:String>.png</x:String>
+                        <x:String>.bmp</x:String>
+                        <x:String>.gif</x:String>
+                        <x:String>.jpeg</x:String>
+                        <x:String>.tiff</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="13"
+                x:Name="imageConvertButton"
+                Text="Convert"
+                Clicked="imageConvertClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="3"
+                Grid.Row="13"
+                x:Name="imageStatus"
+                Text="Status: "
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.ColumnSpan="3"
+                Grid.Row="14"
+                x:Name="imagePath"
+                Text="Destination Path:"
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="3"
+                Grid.Row="14"
+                x:Name="imageOpenLocation"
+                Text="Open file location"
+                Clicked="imageOpenFileLocation"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <!--DOC CONVERTER-->
+
+            <Label
+                Grid.ColumnSpan="4"
+                Grid.Row="15"
+                Text="DOC CONVERTER"
+                FontSize="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="16"
+                x:Name="docInfo"
+                Text="PDF to Word"
+                FontSize="19"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="1"
+                Grid.Row="16"
+                x:Name="docSwap"
+                Text="←→"
+                Clicked="Swap"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="16"
+                x:Name="docSelectionButton"
+                Text="Select document..."
+                Clicked="docSelectionClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="0"
+                Grid.Row="17"
+                x:Name="docConvertButton"
+                Text="Convert"
+                Clicked="docConvertClick"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Grid.Column="1"
+                Grid.Row="17"
+                x:Name="docOpenLocation"
+                Text="Open file location"
+                Clicked="docOpenFileLocation"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Column="2"
+                Grid.Row="17"
+                x:Name="docStatus"
+                Text="Status: "
+                FontSize="19"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
 
