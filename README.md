@@ -26,8 +26,8 @@ The PDF converter is really easy to use. Just upload a file you want
 to convert and let our app do the magic. In a few seconds your file will be 
 converted and you can grab it from the app folder. You can convert from PDF to a Word Document or the other way around.
 The same goes with our audio, video, image format converter. Just select which format 
-you want to convert from and to, drag your file into the app and it will be 
-ready in seconds.
+you want to convert from and to, upload your file, and click on the "Convert" button.
+After this, you have a button to open the file location directly.
 
 
 ## Project schedule
