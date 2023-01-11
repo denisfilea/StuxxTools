@@ -2,12 +2,10 @@
 
 ## Technical Documentation
 
-Stuxxkit will consist of 2 individual projects: StuxxTools - A multi-platform 
-app, and StuxxBot - a Discord bot.
 StuxxTools will be a multi-platform all in one application that will contain a 
 variety of media tools, to be more specific audio, video, and image converters, as well as a doc(x) to pdf and back converter.
 
-Languages for these projects:
+Languages used:
 StuxxTools: `C#` and `XAML` with `.NET MAUI` framework
 
 StuxxTools will be using the .NET MAUI framework for easy compatibility on 
