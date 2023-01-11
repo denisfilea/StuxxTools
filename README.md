@@ -12,6 +12,9 @@ StuxxTools will be using the .NET MAUI framework for easy compatibility on
 all 4 major platforms: Windows, Android, Mac and iOS. That means it will work on 
 every single platform with their corresponding UI’s already implemented in them.
 
+Technical Requirements:
+- Anything really
+
 ## User Guide
 
 ### StuxxTools
